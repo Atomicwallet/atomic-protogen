@@ -1,0 +1,24 @@
+{
+  "name": "atomic-protogen",
+  "version": "1.0.0",
+  "files": [
+    "dist",
+    "proto",
+    "scripts"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "folder-hash": "^4.1.1",
+    "ts-proto": "^2.7.0",
+    "zx": "^8.5.3"
+  },
+  "main": "index.ts",
+  "devDependencies": {},
+  "description": "Used to build typescript source files from .proto files for cosmos-like blockchains that are used in the Atomic Wallet."
+}
