@@ -21,9 +21,9 @@ RUN npm ci
 
 # Copy the rest of the application code
 COPY proto/ proto/
-COPY scripts/build.mjs scripts/build.mjs
+COPY scripts/ scripts/
 
 # Run the build script
 RUN npm run build
 
-RUN cat /app/output_hash.txt
+RUN cat /app/dist/output_hash.txt
