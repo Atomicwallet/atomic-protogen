@@ -1,5 +1,7 @@
 # atomic-protogen
 
+Used to build typescript source files from .proto files for cosmos-like blockchains that are used in the Atomic Wallet.
+
 ## build
 Builds a Docker image, generates TypeScript code within the image, and copies the results to the local `dist` directory.
 
