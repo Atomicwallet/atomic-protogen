@@ -33,7 +33,7 @@ echo "The output hash of keplr build script result is"
 cat ./dist/outputHash
 echo
 
-rm md5dist.txt
+[[ -f "md5dist.txt" ]] && rm md5dist.txt
 find "dist" -type f -exec md5sum {} \; | sort | md5sum | awk '{print $1}' > md5dist.txt
 echo "MD5 hash of dist directory: "
 cat md5dist.txt
