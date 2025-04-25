@@ -2,12 +2,8 @@
 import "zx/globals";
 import fs from "fs";
 import path from "path";
-import { calculateOutputHash, outDir, __dirname, baseProtoPath, thirdPartyProtoPath, outputHashLocation } from "./lib.mjs";
+import { outDir, __dirname, baseProtoPath, thirdPartyProtoPath } from "./lib.mjs";
 import { $ } from "zx";
-
-function setOutputHash(filepath, hash) {
-  return fs.writeFileSync(filepath, hash, { mode: 0o600 });
-}
 
 (async () => {
   try {
@@ -54,12 +50,6 @@ function setOutputHash(filepath, hash) {
     fs.rmSync(path.join(outDir, "cosmos_proto"), {
       recursive: true,
     });
-
-    const outputHash = await calculateOutputHash(outDir);
-
-    console.log("Output hash is", outputHash);
-
-    setOutputHash(outputHashLocation, outputHash);
   } catch (e) {
     console.log(e);
     process.exit(1);
