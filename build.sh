@@ -6,7 +6,6 @@ TO_COPY=(
   "cosmos"
   "google"
   "tendermint"
-  "outputHash"
   # Add more directories as needed
 )
 
@@ -17,17 +16,24 @@ mkdir -p dist
 
 # Copy each specified directory
 for dir in "${TO_COPY[@]}"; do
-  echo "Copying: $dir"
+  # echo "Copying: $dir"
   docker container cp $id:/app/third_party/keplr-wallet/packages/proto-types/$dir dist/
 
   # Calculate and output md5 hash of the copied directory
-  echo "Calculating md5 hash for $dir..."
+  # echo "Calculating md5 hash for $dir..."
   if [[ -d "dist/$dir" ]]; then
     find "dist/$dir" -type f -exec md5sum {} \; | sort | md5sum | awk '{print "MD5 hash of '"$dir"' directory: " $1}'
-  else
-    echo "Warning: Directory dist/$dir does not exist after copying"
   fi
 done
 
-# docker container cp $id:/app/third_party/keplr-wallet/packages/proto-types/ dist
+docker container cp $id:/app/third_party/keplr-wallet/packages/proto-types/outputHash dist/
 docker rm -v $id
+
+echo "The output hash of keplr build script result is"
+cat ./dist/outputHash
+echo
+
+rm md5dist.txt
+find "dist" -type f -exec md5sum {} \; | sort | md5sum | awk '{print $1}' > md5dist.txt
+echo "MD5 hash of dist directory: "
+cat md5dist.txt
